@@ -2,23 +2,24 @@
   (:require [clojure.test :refer :all]
             [pattern.core :refer :all]))
 
-(deftest print-rectangle-test
+(deftest rectangle-test
   (testing "Rectangle"
-    (is (= [["X" "X"] ["X" "X"]] (rectangle 2 2 "X" repeat-symbol))))
+    (is (= [["X" "X"] ["X" "X"]] (rectangle 2 (repeat-symbol 2 "X")))))
   )
 
 (deftest print-shape-test
   (testing "Print Shape"
-    (is (= "**\n**\n**\n**\n**" (print-shape (rectangle 2 5 "*" repeat-symbol) identity))))
+    (is (= "**\n**\n**\n**\n**"
+           (print-shape (rectangle 5 (repeat-symbol 2 "*")) identity))))
   )
 
-
-(deftest filled-rectangle-test
-  (testing "Filled Rectangle"
-    (is (= [["X" "X"] ["X" "X"]] (filled-rectangle 2 2 "X"))))
+(deftest alternate-symbol-test
+  (testing "Print Shape"
+    (is (= ["*" " " "*" " " "*"] (alternate-symbol 5 "*" " "))))
   )
 
-(deftest empty-rectangle-test
-  (testing "Filled Rectangle"
-    (is (= [["*" "*" "*"] ["*" " " "*"] ["*" "*" "*"]] (empty-rectangle 3 3 "*"))))
+(deftest empty-line-test
+  (testing "Empty line"
+    (is (= ["X" " " "X"] (empty-line 3 "X")))
+    )
   )
