@@ -1,36 +1,32 @@
 (ns pattern.core)
 
-(defn repeat-symbol [times symbol] (into [] (repeat times symbol)))
+(defn repeat-symbol
+  [times symbol]
+  (into [] (repeat times symbol)))
 
-(defn rectangle
-  [height pattern]
-  (loop [height height result []]
-    (if (zero? height)
+(defn replace-first
+  [list value]
+  (assoc list 0 value))
+
+(defn replace-last
+  [list value]
+  (assoc list (dec (count list)) value))
+
+(defn repeat-pattern
+  [times pattern]
+  (loop [times times result []]
+    (if (zero? times)
       result
-      (recur (dec height) (conj result pattern))
-      )
-    ))
+      (recur (dec times) (conj result pattern)))))
 
 (defn empty-line [times symbol]
-  (let [result (assoc (repeat-symbol times " ") 0 symbol)
-        last-index (dec (count result))]
-    (assoc result last-index symbol)
-    ))
-
-(defn alternate-symbol
-  [width symbol1 symbol2]
-  (->> [symbol1 symbol2]
-       (repeat width)
-       (flatten)
-       (take width)
-       (vec)
-       ))
-
+  (-> (repeat-symbol times " ")
+      (replace-first symbol)
+      (replace-last symbol)))
 
 (defn print-shape
   [shape printer]
   (->> shape
-       (map #(clojure.string/join "" %1))
+       (map (partial apply str))
        (clojure.string/join "\n")
-       (printer))
-  )
+       (printer)))

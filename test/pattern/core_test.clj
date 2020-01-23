@@ -4,18 +4,13 @@
 
 (deftest rectangle-test
   (testing "Rectangle"
-    (is (= [["X" "X"] ["X" "X"]] (rectangle 2 (repeat-symbol 2 "X")))))
+    (is (= [["X" "X"] ["X" "X"]] (repeat-pattern 2 (repeat-symbol 2 "X")))))
   )
 
 (deftest print-shape-test
   (testing "Print Shape"
     (is (= "**\n**\n**\n**\n**"
-           (print-shape (rectangle 5 (repeat-symbol 2 "*")) identity))))
-  )
-
-(deftest alternate-symbol-test
-  (testing "Print Shape"
-    (is (= ["*" " " "*" " " "*"] (alternate-symbol 5 "*" " "))))
+           (print-shape (repeat-pattern 5 (repeat-symbol 2 "*")) identity))))
   )
 
 (deftest empty-line-test

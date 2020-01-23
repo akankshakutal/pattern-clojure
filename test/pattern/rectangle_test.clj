@@ -14,5 +14,5 @@
 
 (deftest alternate-rectangle-test
   (testing "Filled Rectangle"
-    (is (= [["X" " " "X"] ["X" " " "X"] ["X" " " "X"]] (alternate-rectangle 3 3 "X" " "))))
+    (is (= [["X" "X" "X"] [" " " " " "] ["X" "X" "X"]] (alternate-rectangle 3 3 "X" " "))))
   )
