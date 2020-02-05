@@ -3,13 +3,15 @@
 
 (defn filled-rectangle
   [width height symbol]
-  (repeat-pattern height (repeat-symbol width symbol)))
+  (repeat-symbol height (repeat-symbol width symbol)))
 
 (defn empty-rectangle
   [width height symbol]
-  (-> (repeat-pattern height (empty-line width symbol))
+  (-> height
+      (repeat-symbol (empty-line width symbol))
       (replace-first (repeat-symbol width symbol))
-      (replace-last (repeat-symbol width symbol))))
+      (replace-last (repeat-symbol width symbol))
+      (flip-and-take height)))
 
 (defn alternate-rectangle
   [width height symbol1 symbol2]

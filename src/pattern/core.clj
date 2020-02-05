@@ -1,28 +1,18 @@
 (ns pattern.core)
 
-(defn repeat-symbol
-  [times symbol]
-  (into [] (repeat times symbol)))
+(def repeat-symbol (comp (partial into []) repeat))
 
-(defn replace-first
-  [list value]
-  (assoc list 0 value))
+(def replace-first #(assoc %1 0 %2))
 
-(defn replace-last
-  [list value]
-  (assoc list (dec (count list)) value))
+(def replace-last #(assoc %1 (dec (count %1)) %2))
 
-(defn repeat-pattern
-  [times pattern]
-  (loop [times times result []]
-    (if (zero? times)
-      result
-      (recur (dec times) (conj result pattern)))))
+(def flip-and-take #(vec (take %2 %1)))
 
 (defn empty-line [times symbol]
   (-> (repeat-symbol times " ")
       (replace-first symbol)
-      (replace-last symbol)))
+      (replace-last symbol)
+      (flip-and-take times)))
 
 (defn print-shape
   [shape printer]
