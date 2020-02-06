@@ -3,7 +3,7 @@
 
 (defn filled-rectangle
   [width height symbol]
-  (repeat-symbol height (repeat-symbol width symbol)))
+  (map #(repeat-symbol % symbol) (repeat width height)))
 
 (defn empty-rectangle
   [width height symbol]
@@ -15,6 +15,7 @@
 
 (defn alternate-rectangle
   [width height symbol1 symbol2]
-  (->> [(repeat-symbol width symbol1) (repeat-symbol width symbol2)]
+  (->> [symbol1 symbol2]
+       (map (partial repeat-symbol width))
        (cycle)
        (take height)))

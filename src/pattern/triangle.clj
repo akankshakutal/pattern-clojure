@@ -3,24 +3,12 @@
 
 (defn filled-triangle
   [height symbol]
-  (loop [current-height 1 result []]
-    (if (> current-height height)
-        result
-        (recur (inc current-height)
-               (conj result (repeat-symbol current-height symbol))))))
+  (map #(repeat-symbol % symbol) (range 1 (inc height))))
 
 (defn empty-triangle
   [height symbol]
-  (loop [current-height 1 result []]
-    (if (> current-height height)
-        result
-        (recur (inc current-height)
-               (conj result (empty-line current-height symbol))))))
+  (map #(empty-line % symbol) (range 1 (inc height))))
 
-(defn alternate-triangle [height symbol1 symbol2]
-  (loop [current-height 1 result [] symbols (cycle (vector symbol1 symbol2))]
-    (if (> current-height height)
-        result
-        (recur (inc current-height)
-               (conj result (repeat-symbol current-height (first symbols)))
-               (rest symbols)))))
+(defn alternate-triangle
+  [height symbol1 symbol2]
+  (map repeat-symbol (range 1 (inc height)) (cycle [symbol1 symbol2])))

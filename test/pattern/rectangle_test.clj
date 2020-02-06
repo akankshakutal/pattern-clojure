@@ -8,7 +8,7 @@
   )
 
 (deftest empty-rectangle-test
-  (testing "Filled Rectangle"
+  (testing "Empty Rectangle"
     (is (= [["*" "*" "*"] ["*" " " "*"] ["*" "*" "*"]] (empty-rectangle 3 3 "*"))))
   )
 
