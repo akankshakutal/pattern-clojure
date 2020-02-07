@@ -1,14 +1,17 @@
 (ns pattern.triangle
   (:require [pattern.core :refer :all]))
 
+(defn triangle [fn height symbols]
+               (map fn (range 1 (inc height)) (cycle symbols)))
+
 (defn filled-triangle
   [height symbol]
-  (map #(repeat-symbol % symbol) (range 1 (inc height))))
+  (triangle repeat-symbol height [symbol]))
 
 (defn empty-triangle
   [height symbol]
-  (map #(empty-line % symbol) (range 1 (inc height))))
+  (triangle empty-line height [symbol]))
 
 (defn alternate-triangle
   [height symbol1 symbol2]
-  (map repeat-symbol (range 1 (inc height)) (cycle [symbol1 symbol2])))
+  (triangle repeat-symbol height [symbol1 symbol2]))
