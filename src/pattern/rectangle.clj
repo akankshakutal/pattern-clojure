@@ -1,21 +1,22 @@
 (ns pattern.rectangle
   (:require [pattern.core :refer :all]))
 
+(defn middle-lines [width height symbol]
+                   (repeat height (bordered-line width symbol)))
+
 (defn filled-rectangle
   [width height symbol]
-  (map #(repeat-symbol % symbol) (repeat width height)))
+  (repeat height (line width symbol)))
 
 (defn empty-rectangle
   [width height symbol]
-  (-> height
-      (repeat-symbol (empty-line width symbol))
-      (replace-first (repeat-symbol width symbol))
-      (replace-last (repeat-symbol width symbol))
-      (flip-and-take height)))
+  (concat [(line width symbol)]
+          (middle-lines width (dec (dec height)) symbol)
+          [(line width symbol)]))
 
 (defn alternate-rectangle
   [width height symbol1 symbol2]
   (->> [symbol1 symbol2]
-       (map (partial repeat-symbol width))
+       (map (partial line width))
        (cycle)
        (take height)))

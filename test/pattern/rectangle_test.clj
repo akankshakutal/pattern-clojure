@@ -4,15 +4,15 @@
 
 (deftest filled-rectangle-test
   (testing "Filled Rectangle"
-    (is (= [["X" "X"] ["X" "X"]] (filled-rectangle 2 2 "X"))))
+    (is (= '("XX" "XX") (filled-rectangle 2 2 "X"))))
   )
 
 (deftest empty-rectangle-test
   (testing "Empty Rectangle"
-    (is (= [["*" "*" "*"] ["*" " " "*"] ["*" "*" "*"]] (empty-rectangle 3 3 "*"))))
+    (is (= ["***" "* *" "***"] (empty-rectangle 3 3 "*"))))
   )
 
 (deftest alternate-rectangle-test
   (testing "Filled Rectangle"
-    (is (= [["X" "X" "X"] [" " " " " "] ["X" "X" "X"]] (alternate-rectangle 3 3 "X" " "))))
+    (is (= ["XXX" "   " "XXX"] (alternate-rectangle 3 3 "X" " "))))
   )

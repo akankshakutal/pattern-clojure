@@ -5,6 +5,4 @@
 
 (deftest empty-line-test
   (testing "Empty line"
-    (is (= ["X" " " "X"] (empty-line 3 "X")))
-    )
-  )
+    (is (= "X X" (bordered-line 3 "X")))))
